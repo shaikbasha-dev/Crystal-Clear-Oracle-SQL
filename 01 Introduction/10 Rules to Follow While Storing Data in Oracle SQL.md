@@ -78,6 +78,19 @@ INSERT INTO student
 VALUES ('Shaik Mahaboob Basha', 23, 'Male', 'E.C.E', 458, 93);
 ```
 
+If want only some columns to insert the values then we have to use this syntax
+
+```sql
+INSERT INTO table_name (Col_name1, Col_name2)
+VALUES (value1, value2);
+```
+
+**Example**
+
+```sql
+INSERT INTO student(Name, Age)
+VALUES ('Shaik Mahaboob Basha', 23);
+
 Now the data is stored as a row in the `student` table.
 
 ### Complete Flow

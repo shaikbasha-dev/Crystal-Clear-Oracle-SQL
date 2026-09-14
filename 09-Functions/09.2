@@ -1,0 +1,1373 @@
+# 09.2 Single row function
+
+## 1. What are Single Row Functions?
+
+In SQL, there are two types of functions:
+
+1. **Single Row Functions**
+2. **Multiple Row Functions**
+
+A **Single Row Function** accepts a single row as input and produces **one result for each row**.
+
+It can also accept multiple rows as input, but it produces one result **for every individual row**. 
+
+### Types of Single Row Functions
+
+```text
+Single Row Functions
+│
+├── General Functions
+├── Date Functions
+├── Conversion Functions
+├── Character Functions
+└── Number Functions
+```
+
+
+
+---
+
+# 2. Character Functions
+
+Character functions work with character/string data.
+
+---
+
+## 2.1 UPPER()
+
+`UPPER()` converts characters into **uppercase**.
+
+### Question
+
+**Write a query to display uppercase of data `'Akash'`.**
+
+### Answer / Query
+
+```sql
+SELECT UPPER('Akash')
+FROM dual;
+```
+
+### Output
+
+```text
+AKASH
+```
+
+
+
+---
+
+### Question
+
+**Write a query to display all the first names of the employees in uppercase.**
+
+### Answer / Query
+
+```sql
+SELECT UPPER(f_name)
+FROM emp;
+```
+
+### Explanation
+
+`UPPER(f_name)` converts every employee's first name into uppercase.
+
+Example:
+
+```text
+Akash       → AKASH
+Prabhakaran → PRABHAKARAN
+Deep        → DEEP
+Ashwin      → ASHWIN
+```
+
+
+
+---
+
+### Question
+
+**Write a query to display all the first names and last names of the employees in uppercase where lastname is `'Pandey'`.**
+
+### Answer / Query
+
+```sql
+SELECT UPPER(f_name), UPPER(l_name)
+FROM emp
+WHERE l_name = 'Pandey';
+```
+
+### Output
+
+```text
+AKASH    PANDEY
+```
+
+
+
+---
+
+### Question
+
+**Write a query to display f_name, l_name and salaries whose f_name is `'Akash'`.**
+
+### Answer / Query
+
+```sql
+SELECT UPPER(f_name), UPPER(l_name), salary
+FROM emp
+WHERE f_name = 'Akash';
+```
+
+### Output
+
+```text
+AKASH    PANDEY    34000
+```
+
+
+
+---
+
+# 2.2 LOWER()
+
+`LOWER()` converts characters into **lowercase**.
+
+### Question
+
+**Write a query to display lowercase of data `'Pandey'`.**
+
+### Answer / Query
+
+```sql
+SELECT LOWER('Pandey')
+FROM dual;
+```
+
+### Output
+
+```text
+pandey
+```
+
+
+
+---
+
+# 2.3 INITCAP()
+
+`INITCAP()` converts the **initial letter of a word to uppercase**.
+
+### Question
+
+**Write a query to display the initial letter capital of data `'kodnest'`.**
+
+### Answer / Query
+
+```sql
+SELECT INITCAP('kodnest')
+FROM dual;
+```
+
+### Output
+
+```text
+Kodnest
+```
+
+
+
+---
+
+# 2.4 CONCAT()
+
+`CONCAT()` combines two values.
+
+### Question
+
+**Write a query to concatenate data `'Akash'` and `'Pandey'`.**
+
+### Answer / Query
+
+```sql
+SELECT CONCAT('Akash', 'Pandey')
+FROM dual;
+```
+
+### Output
+
+```text
+AkashPandey
+```
+
+
+
+---
+
+### Question
+
+**Write a query to concatenate data of f_name and l_name of all the employees from EMP table.**
+
+### Answer / Query
+
+```sql
+SELECT CONCAT(f_name, l_name)
+FROM emp;
+```
+
+### Example Output
+
+```text
+AkashPandey
+PrabhakaranGaneshan
+DEEPNair
+AshwinK
+JohnWilliams
+ShashiRaj
+AndyJ
+DanielKing
+AdamSam
+...
+```
+
+ 
+
+---
+
+### Question
+
+**Write a query to combine the data `'1111'` and `'2222'`.**
+
+### Answer / Query
+
+```sql
+SELECT CONCAT('1111', '2222')
+FROM dual;
+```
+
+### Output
+
+```text
+11112222
+```
+
+
+
+---
+
+### Question
+
+**Write a query to combine the data `'1111'` and `'Ramu'`.**
+
+### Answer / Query
+
+```sql
+SELECT CONCAT('1111', 'Ramu')
+FROM dual;
+```
+
+### Output
+
+```text
+1111Ramu
+```
+
+
+
+---
+
+### Question
+
+**Write a query to combine the data `'1111'` with NULL.**
+
+### Answer / Query
+
+```sql
+SELECT CONCAT('1111', NULL)
+FROM dual;
+```
+
+### Output
+
+```text
+1111
+```
+
+
+
+---
+
+# 2.5 LENGTH()
+
+`LENGTH()` returns the number of characters in a value.
+
+### Question
+
+**Write a query to find the length of the string `'Prabhakaran'`.**
+
+### Answer / Query
+
+```sql
+SELECT LENGTH('Prabhakaran')
+FROM dual;
+```
+
+### Output
+
+```text
+11
+```
+
+
+
+---
+
+### Question
+
+**Write a query to find the length of all the f_names.**
+
+### Answer / Query
+
+```sql
+SELECT LENGTH(f_name)
+FROM emp;
+```
+
+This produces one length for each employee's first name. 
+
+---
+
+### Question
+
+**Write a query to find the length of `1111`.**
+
+### Answer / Query
+
+```sql
+SELECT LENGTH(1111)
+FROM dual;
+```
+
+### Output
+
+```text
+4
+```
+
+
+
+---
+
+### Question
+
+**Write a query to display the length of NULL.**
+
+### Answer / Query
+
+```sql
+SELECT LENGTH(NULL)
+FROM dual;
+```
+
+### Output
+
+```text
+NULL
+```
+
+The notes display this as `-`. 
+
+---
+
+# 2.6 SUBSTR()
+
+`SUBSTR()` extracts a part of a string.
+
+Basic idea:
+
+```text
+SUBSTR(string, starting_position, number_of_characters)
+```
+
+---
+
+### Question
+
+**Write a query to display the substring of the string `'PRABHAKARAN'` from 2nd position and extract 5 characters.**
+
+### Answer / Query
+
+```sql
+SELECT SUBSTR('PRABHAKARAN', 2, 5)
+FROM dual;
+```
+
+### Output
+
+```text
+RABHA
+```
+
+
+
+---
+
+### Question
+
+**Write a query to display the substring `'oha'` from the string `'RajaRamMohanRoy'`.**
+
+### Answer / Query
+
+```sql
+SELECT SUBSTR('RajaRamMohanRoy', 9, 3)
+FROM dual;
+```
+
+### Output
+
+```text
+oha
+```
+
+
+
+---
+
+# 2.7 INSTR()
+
+`INSTR()` finds the **position of a character/string** inside another string.
+
+---
+
+### Question
+
+**Write a query to display the position of the character `'a'` in the string `'Pandey'`.**
+
+### Answer / Query
+
+```sql
+SELECT INSTR('Pandey', 'a')
+FROM dual;
+```
+
+### Output
+
+```text
+2
+```
+
+Because:
+
+```text
+P a n d e y
+1 2 3 4 5 6
+  ↑
+```
+
+
+
+---
+
+### Question
+
+**Write a query to display the position of the character `'a'` in all the first names.**
+
+### Answer / Query
+
+```sql
+SELECT INSTR(f_name, 'a')
+FROM emp;
+```
+
+If `'a'` is not present, the result shown is `0`.
+
+
+
+---
+
+# 2.8 SUBSTR() + INSTR()
+
+These two functions can be used together.
+
+### Question
+
+**Write a query to display the substring `'bha'` from the f_name where f_name is `'Prabhakaran'`, using both substring and instring.**
+
+### Answer / Query
+
+```sql
+SELECT SUBSTR(
+    'Prabhakaran',
+    INSTR('Prabhakaran', 'bha'),
+    3
+)
+FROM dual;
+```
+
+### How it works
+
+First:
+
+```sql
+INSTR('Prabhakaran', 'bha')
+```
+
+finds where `bha` starts.
+
+Then:
+
+```sql
+SUBSTR(..., 3)
+```
+
+extracts 3 characters.
+
+### Output
+
+```text
+bha
+```
+
+
+
+---
+
+# 2.9 TRIM()
+
+`TRIM()` removes characters from the specified side.
+
+There are three forms used here:
+
+```text
+LEADING
+TRAILING
+BOTH
+```
+
+---
+
+### Question
+
+**Write a query to trim the leading `'m'` in the string `'malayalam'`.**
+
+### Answer / Query
+
+```sql
+SELECT TRIM(LEADING 'm' FROM 'malayalam')
+FROM dual;
+```
+
+### Output
+
+```text
+alayalam
+```
+
+
+
+---
+
+### Question
+
+**Write a query to trim the trailing `'m'` in the string `'malayalam'`.**
+
+### Answer / Query
+
+```sql
+SELECT TRIM(TRAILING 'm' FROM 'malayalam')
+FROM dual;
+```
+
+### Output
+
+```text
+malayala
+```
+
+
+
+---
+
+### Question
+
+**Write a query to trim both leading and trailing `'m'` in the string `'malayalam'`.**
+
+### Answer / Query
+
+```sql
+SELECT TRIM(BOTH 'm' FROM 'malayalam')
+FROM dual;
+```
+
+### Output
+
+```text
+alayala
+```
+
+
+
+---
+
+# 2.10 LPAD()
+
+`LPAD()` adds characters to the **left side** of a value until the specified length is reached.
+
+### Question
+
+**Write a query to display the data `'Sharma'` in the format `'####Sharma'`.**
+
+### Answer / Query
+
+```sql
+SELECT LPAD('Sharma', 10, '#')
+FROM dual;
+```
+
+### Output
+
+```text
+####Sharma
+```
+
+
+
+---
+
+# 2.11 RPAD()
+
+`RPAD()` adds characters to the **right side**.
+
+### Question
+
+**Write a query to display the data `'Sharma'` in the format `'Sharma####'`.**
+
+### Answer / Query
+
+```sql
+SELECT RPAD('Sharma', 10, '#')
+FROM dual;
+```
+
+### Output
+
+```text
+Sharma####
+```
+
+
+
+---
+
+### Question
+
+**Write a query to display the data `'Sharma'` in the format `'Sharma#!#!'`.**
+
+### Answer / Query
+
+```sql
+SELECT RPAD('Sharma', 10, '#!')
+FROM dual;
+```
+
+### Output
+
+```text
+Sharma#!#!
+```
+
+
+
+---
+
+# 3. Number Functions
+
+The Number Functions used here are:
+
+```text
+ROUND()
+TRUNC()
+MOD()
+```
+
+---
+
+# 3.1 ROUND()
+
+`ROUND()` rounds a number to the specified number of decimal places.
+
+---
+
+### Question
+
+**What would be the output of the following query?**
+
+### Answer / Query
+
+```sql
+SELECT ROUND(45.326, 2)
+FROM dual;
+```
+
+### Output
+
+```text
+45.33
+```
+
+
+
+---
+
+### Question
+
+**What would be the output of the following query?**
+
+### Answer / Query
+
+```sql
+SELECT ROUND(1234.356, 1)
+FROM dual;
+```
+
+### Output
+
+```text
+1234.4
+```
+
+
+
+---
+
+### Question
+
+**What would be the output of the following query?**
+
+### Answer / Query
+
+```sql
+SELECT ROUND(2678.345, -2)
+FROM dual;
+```
+
+### Output
+
+```text
+2700
+```
+
+
+
+---
+
+### Question
+
+**What would be the output of the following query?**
+
+### Answer / Query
+
+```sql
+SELECT ROUND(123, -2)
+FROM dual;
+```
+
+### Output
+
+```text
+100
+```
+
+
+
+---
+
+# 3.2 TRUNC()
+
+`TRUNC()` removes digits without rounding.
+
+---
+
+### Question
+
+**What would be the output of the following query?**
+
+### Answer / Query
+
+```sql
+SELECT TRUNC(45.326, 2)
+FROM dual;
+```
+
+### Output
+
+```text
+45.32
+```
+
+
+
+---
+
+### Question
+
+**What would be the output of the following query?**
+
+### Answer / Query
+
+```sql
+SELECT TRUNC(1234.356, 1)
+FROM dual;
+```
+
+### Output
+
+```text
+1234.3
+```
+
+
+
+---
+
+### Question
+
+**What would be the output of the following query?**
+
+### Answer / Query
+
+```sql
+SELECT TRUNC(2678.345, -2)
+FROM dual;
+```
+
+### Output
+
+```text
+2600
+```
+
+
+
+---
+
+### Question
+
+**What would be the output of the following query?**
+
+### Answer / Query
+
+```sql
+SELECT TRUNC(123, -2)
+FROM dual;
+```
+
+### Output
+
+```text
+100
+```
+
+
+
+---
+
+# 3.3 MOD()
+
+`MOD()` returns the **remainder** after division.
+
+### Question
+
+**What would be the output of the following query?**
+
+### Answer / Query
+
+```sql
+SELECT MOD(120, 2)
+FROM dual;
+```
+
+### Output
+
+```text
+0
+```
+
+Because:
+
+```text
+120 ÷ 2 = 60
+remainder = 0
+```
+
+
+
+---
+
+# 4. General Functions
+
+The General Functions used here are:
+
+```text
+NVL()
+NVL2()
+CASE
+```
+
+---
+
+# 4.1 NVL()
+
+`NVL()` is used when a value may be `NULL`.
+
+The requirement here is:
+
+```text
+If commission_pct is NULL → display 0
+Otherwise → display commission_pct
+```
+
+### Question
+
+**Write a query to display the commission_pct. If commission_pct is null, replace it with 0.**
+
+### Answer / Query
+
+```sql
+SELECT NVL(commission_pct, 0)
+FROM emp;
+```
+
+### Simple understanding
+
+```text
+commission_pct     NVL result
+
+NULL        →      0
+0.5         →      0.5
+0.75        →      0.75
+1.5         →      1.5
+```
+
+
+
+---
+
+# 4.2 NVL2()
+
+`NVL2()` checks whether a value is NULL or NOT NULL.
+
+Here:
+
+```sql
+NVL2(commission_pct, 5, 0)
+```
+
+means:
+
+```text
+If commission_pct is NOT NULL → 5
+If commission_pct is NULL     → 0
+```
+
+### Question
+
+**Write a query to display the commission_pct. If commission_pct is null replace with 0, else replace with 5.**
+
+### Answer / Query
+
+```sql
+SELECT NVL2(commission_pct, 5, 0)
+FROM emp;
+```
+
+### Explanation
+
+```text
+commission_pct NULL
+        ↓
+       0
+
+commission_pct NOT NULL
+        ↓
+       5
+```
+
+
+
+---
+
+# 4.3 CASE Expression
+
+`CASE` allows us to check a condition and produce different results.
+
+### Question
+
+**Write a query to display the f_name, l_name, length of f_name and length of l_name for all employees. If length of f_name is equal to length of l_name, display NULL. If length of f_name is not equal to length of l_name, display length of f_name.**
+
+### Answer / Query
+
+```sql
+SELECT f_name,
+       l_name,
+       LENGTH(f_name),
+       LENGTH(l_name),
+       CASE
+           WHEN LENGTH(f_name) = LENGTH(l_name) THEN NULL
+           ELSE LENGTH(f_name)
+       END
+FROM emp;
+```
+
+### Understand the logic
+
+Suppose:
+
+```text
+f_name = DEEP
+length = 4
+
+l_name = Nair
+length = 4
+```
+
+Both lengths are equal:
+
+```text
+4 = 4
+```
+
+Therefore:
+
+```text
+NULL
+```
+
+is displayed.
+
+But:
+
+```text
+f_name = Akash
+length = 5
+
+l_name = Pandey
+length = 6
+```
+
+The lengths are different, so:
+
+```text
+5
+```
+
+is displayed.
+
+
+
+---
+
+# 5. Date Functions
+
+The Date Functions used here are:
+
+```text
+SYSDATE
+MONTHS_BETWEEN()
+ADD_MONTHS()
+NEXT_DAY()
+LAST_DAY()
+```
+
+---
+
+# 5.1 SYSDATE
+
+`SYSDATE` displays the system date.
+
+### Question
+
+**Write a query to display system date.**
+
+### Answer / Query
+
+```sql
+SELECT SYSDATE
+FROM dual;
+```
+
+### Output shown in the notes
+
+```text
+29-OCT-23
+```
+
+
+
+---
+
+# 5.2 MONTHS_BETWEEN()
+
+`MONTHS_BETWEEN()` finds the number of months between two dates.
+
+### Question
+
+**Write a query to display the number of months between the dates 14-NOV-2014 and 14-FEB-2014.**
+
+### Answer / Query
+
+```sql
+SELECT MONTHS_BETWEEN('14-nov-2014', '14-feb-2014')
+FROM dual;
+```
+
+### Output
+
+```text
+9
+```
+
+
+
+---
+
+# 5.3 ADD_MONTHS()
+
+`ADD_MONTHS()` adds or subtracts months from a date.
+
+### Question
+
+**Write a query to add 9 months to the date 14-FEB-2014.**
+
+### Answer / Query
+
+```sql
+SELECT ADD_MONTHS('14-feb-2014', 9)
+FROM dual;
+```
+
+### Output
+
+```text
+14-NOV-14
+```
+
+
+
+---
+
+### Question
+
+**Write a query to add 9 months to the date 14-FEB-2014 in reverse order.**
+
+### Answer / Query
+
+```sql
+SELECT ADD_MONTHS('14-feb-2014', -9)
+FROM dual;
+```
+
+### Output
+
+```text
+14-MAY-13
+```
+
+Here `-9` means **subtract 9 months**.
+
+
+
+---
+
+# 5.4 NEXT_DAY()
+
+`NEXT_DAY()` finds the specified day occurring after a given date.
+
+### Question
+
+**Write a query to find the date of the next Saturday after the date 08-DEC-2012.**
+
+### Answer / Query
+
+```sql
+SELECT NEXT_DAY('08-dec-2012', 'Saturday')
+FROM dual;
+```
+
+### Output
+
+```text
+15-DEC-12
+```
+
+
+
+---
+
+# 5.5 LAST_DAY()
+
+`LAST_DAY()` returns the last day of the month for the specified date.
+
+### Question
+
+**Write a query to display the last day of the specified date 2022-06-18.**
+
+### Answer / Query
+
+```sql
+SELECT LAST_DAY('18-Jun-2022')
+FROM dual;
+```
+
+### Output
+
+```text
+30-JUN-22
+```
+
+
+
+---
+
+# 6. Conversion Functions
+
+The Conversion Function used here is:
+
+```text
+TO_CHAR()
+```
+
+`TO_CHAR()` is used here to display values in a specified format.
+
+---
+
+# 6.1 TO_CHAR() with DATE
+
+### Question
+
+**Write a query to display the l_name and hire_date, where the hire_date should be displayed in the format `dd/mm`.**
+
+### Answer / Query
+
+```sql
+SELECT l_name, TO_CHAR(hire_date, 'dd/mm')
+FROM emp;
+```
+
+### Example Output
+
+```text
+L_NAME       TO_CHAR
+Pandey       29/03
+Ganeshan     25/05
+Nair         19/04
+K            27/02
+Williams     15/12
+Raj          25/08
+```
+
+
+
+---
+
+# 6.2 TO_CHAR() with SALARY
+
+### Question
+
+**Write a query to display the l_name and salary. The salary should be displayed in the format `$99,999.99`.**
+
+### Answer / Query
+
+```sql
+SELECT l_name, TO_CHAR(salary, '$99,999.99')
+FROM emp;
+```
+
+### Example Output
+
+```text
+L_NAME       SALARY
+Pandey       $34,000.00
+Ganeshan     $45,000.00
+Nair         $55,000.00
+K            $36,000.00
+Williams     $18,000.00
+Raj          $85,000.00
+J            $28,500.00
+King         $12,000.00
+Sam          $53,000.00
+```
+
+
+
+---
+
+# 7. Single Row Functions — Final Revision
+
+```text
+SINGLE ROW FUNCTIONS
+│
+├── CHARACTER FUNCTIONS
+│   ├── UPPER()
+│   ├── LOWER()
+│   ├── INITCAP()
+│   ├── CONCAT()
+│   ├── LENGTH()
+│   ├── SUBSTR()
+│   ├── INSTR()
+│   ├── TRIM()
+│   ├── LPAD()
+│   └── RPAD()
+│
+├── NUMBER FUNCTIONS
+│   ├── ROUND()
+│   ├── TRUNC()
+│   └── MOD()
+│
+├── GENERAL FUNCTIONS
+│   ├── NVL()
+│   ├── NVL2()
+│   └── CASE
+│
+├── DATE FUNCTIONS
+│   ├── SYSDATE
+│   ├── MONTHS_BETWEEN()
+│   ├── ADD_MONTHS()
+│   ├── NEXT_DAY()
+│   └── LAST_DAY()
+│
+└── CONVERSION FUNCTIONS
+    └── TO_CHAR()
+```
+
+### Most important difference
+
+```text
+Single Row Function
+        ↓
+One result for EACH row
+
+Multiple Row Function
+        ↓
+One result for a GROUP
+```
+
+For example:
+
+```sql
+SELECT UPPER(f_name)
+FROM emp;
+```
+
+gives one result for every employee.
+
+Whereas:
+
+```sql
+SELECT SUM(salary)
+FROM emp;
+```
+
+gives one overall result.
+

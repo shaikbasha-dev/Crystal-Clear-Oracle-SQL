@@ -1,0 +1,338 @@
+# 09-Functions-Overview
+
+## 1. What is a Function in SQL?
+
+A **function** is something that performs a particular operation on data and gives a result.
+
+For example:
+
+```text
+UPPER()  → converts text to uppercase
+LOWER()  → converts text to lowercase
+SUM()    → calculates total
+MAX()    → finds maximum
+MIN()    → finds minimum
+```
+
+The important idea is that SQL functions help us **perform operations on data without writing the complete logic ourselves**.
+
+---
+
+# 2. Types of Functions
+
+There are **two main types of functions**:
+
+```text
+FUNCTIONS
+│
+├── 1. Single Row Functions
+│
+└── 2. Multiple Row Functions
+```
+
+The notes also call multiple-row functions:
+
+```text
+Multiple Row Functions
+        =
+Group Functions
+        =
+Aggregate Functions
+```
+
+
+
+---
+
+# 3. Single Row Functions
+
+A **single-row function** produces **one result for each row**.
+
+Suppose the table has 19 employee rows.
+
+If we use:
+
+```sql
+UPPER(f_name)
+```
+
+then each employee's name is converted separately.
+
+So:
+
+```text
+Akash       → AKASH
+Prabhakaran → PRABHAKARAN
+DEEP        → DEEP
+Ashwin      → ASHWIN
+...
+```
+
+The important point is:
+
+```text
+One row
+   ↓
+Function
+   ↓
+One result
+```
+
+The function can accept a single row or multiple rows, but it produces **one result per row**. 
+
+---
+
+# 4. Types of Single Row Functions
+
+The notes divide **Single Row Functions** into these categories:
+
+```text
+Single Row Functions
+│
+├── General Functions
+│
+├── Date Functions
+│
+├── Conversion Functions
+│
+├── Character Functions
+│
+└── Number Functions
+```
+
+
+
+These categories will be studied inside the **Single Row Functions** file.
+
+---
+
+# 5. Multiple Row Functions
+
+Multiple-row functions are also called:
+
+* Group functions
+* Aggregate functions
+
+They can accept a single row or multiple rows as input, but produce **one result for a group**.
+
+
+
+The functions listed are:
+
+```text
+COUNT()
+SUM()
+MAX()
+MIN()
+AVG()
+```
+
+
+
+---
+
+# 6. Single Row vs Multiple Row Functions
+
+| Single Row Function              | Multiple Row Function           |
+| -------------------------------- | ------------------------------- |
+| Produces one result for each row | Produces one result for a group |
+| Works row-by-row                 | Works on a group of rows        |
+| Example: `UPPER()`               | Example: `SUM()`                |
+| Example: `LOWER()`               | Example: `AVG()`                |
+| Example: `LENGTH()`              | Example: `MAX()`                |
+
+### Very simple memory
+
+```text
+SINGLE ROW
+One row → One result
+
+MULTIPLE ROW
+Many rows → One result
+```
+
+---
+
+# 7. Simple Example to Understand the Difference
+
+Suppose we have:
+
+```text
+SALARY
+------
+10000
+20000
+30000
+```
+
+### Single-row idea
+
+If we perform an operation on each salary:
+
+```text
+10000 → result
+20000 → result
+30000 → result
+```
+
+We get **one result for every row**.
+
+### Multiple-row idea
+
+If we use:
+
+```text
+SUM(salary)
+```
+
+the three salaries are considered together:
+
+```text
+10000
+20000
+30000
+  ↓
+SUM()
+  ↓
+60000
+```
+
+So we get **one result from the group**.
+
+---
+
+# 8. Function Categories at a Glance
+
+```text
+                    FUNCTIONS
+                       │
+          ┌────────────┴────────────┐
+          ↓                         ↓
+ SINGLE ROW FUNCTIONS       MULTIPLE ROW FUNCTIONS
+          │                         │
+          │                         ├── COUNT()
+          │                         ├── SUM()
+          │                         ├── MAX()
+          │                         ├── MIN()
+          │                         └── AVG()
+          │
+          ├── General Functions
+          ├── Date Functions
+          ├── Conversion Functions
+          ├── Character Functions
+          └── Number Functions
+```
+
+---
+
+# 9. Important Difference: Result Per Row vs Result Per Group
+
+This is the **most important point** to remember.
+
+### Single Row Function
+
+```text
+Row 1 → Function → Result 1
+Row 2 → Function → Result 2
+Row 3 → Function → Result 3
+```
+
+### Multiple Row Function
+
+```text
+Row 1 ─┐
+Row 2 ─┼→ Function → One Result
+Row 3 ─┘
+```
+
+---
+
+# 10. Interview Questions
+
+### Q1. How many types of functions are there in SQL according to this classification?
+
+**Answer:**
+Two types:
+
+1. Single Row Functions
+2. Multiple Row Functions
+
+---
+
+### Q2. What is a Single Row Function?
+
+**Answer:**
+A Single Row Function produces one result for each row.
+
+---
+
+### Q3. What are Multiple Row Functions?
+
+**Answer:**
+Multiple Row Functions, also called Group or Aggregate Functions, produce one result for a group of rows.
+
+---
+
+### Q4. Give examples of Single Row Function categories.
+
+**Answer:**
+
+```text
+General Functions
+Date Functions
+Conversion Functions
+Character Functions
+Number Functions
+```
+
+---
+
+### Q5. Give examples of Multiple Row Functions.
+
+**Answer:**
+
+```text
+COUNT()
+SUM()
+MAX()
+MIN()
+AVG()
+```
+
+---
+
+### Q6. What is the main difference between Single Row and Multiple Row Functions?
+
+**Answer:**
+
+```text
+Single Row Function  → One result per row
+Multiple Row Function → One result per group
+```
+
+---
+
+# 11. Quick Revision
+
+```text
+FUNCTIONS
+│
+├── SINGLE ROW FUNCTIONS
+│     ├── General
+│     ├── Date
+│     ├── Conversion
+│     ├── Character
+│     └── Number
+│
+└── MULTIPLE ROW FUNCTIONS
+      ├── COUNT()
+      ├── SUM()
+      ├── MAX()
+      ├── MIN()
+      └── AVG()
+```
+
+**Remember:**
+
+> **Single Row → one result for each row**
+> **Multiple Row → one result for a group**

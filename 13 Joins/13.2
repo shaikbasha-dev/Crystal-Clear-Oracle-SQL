@@ -1,0 +1,373 @@
+# 13.2 Inner Join
+
+## 1. What is an Inner Join?
+
+An **Inner Join** is used to combine two or more tables based on a **common column**.
+
+The most important rule is:
+
+> **Inner Join returns only the matching records from both tables.**
+
+It is also called a **Simple Join**.
+
+For example:
+
+```text
+EMP                         DEPT
+--------                    --------
+DEPT_ID                     DEPT_ID
+   22   ───────────────────>   22
+   23   ───────────────────>   23
+   24   ───────────────────>   24
+```
+
+If a `DEPT_ID` exists in both tables, Oracle can combine those rows.
+
+If it does not exist in both tables, that row is **not returned**.
+
+---
+
+# 2. Simple Example
+
+Consider these two tables.
+
+### Table 1
+
+|  A |  B |
+| -: | -: |
+|  1 |  2 |
+|  3 |  4 |
+|  5 |  6 |
+|  7 |  8 |
+
+### Table 2
+
+|  B |  C |
+| -: | -: |
+|  2 |  1 |
+|  8 |  1 |
+|  9 |  1 |
+
+The common column is `B`.
+
+Now compare:
+
+```text
+Table 1 B    Table 2 B
+--------     ---------
+2       →    2     ✓
+4       →    no    ✗
+6       →    no    ✗
+8       →    8     ✓
+```
+
+Therefore, only `2` and `8` are returned.
+
+### Result
+
+|  A |  B |  B |  C |
+| -: | -: | -: | -: |
+|  1 |  2 |  2 |  1 |
+|  7 |  8 |  8 |  1 |
+
+This is exactly the basic behavior of an Inner Join. 
+
+---
+
+# 3. Syntax
+
+### Question
+
+**How do we write an Inner Join between two tables?**
+
+### Answer / Query
+
+```sql
+SELECT *
+FROM Table1
+INNER JOIN Table2
+ON Table1.B = Table2.B;
+```
+
+
+
+### Understand each part
+
+```sql
+SELECT *
+```
+
+Means:
+
+> Select all columns.
+
+```sql
+FROM Table1
+```
+
+Means:
+
+> Start with `Table1`.
+
+```sql
+INNER JOIN Table2
+```
+
+Means:
+
+> Join `Table2` with `Table1`.
+
+```sql
+ON Table1.B = Table2.B
+```
+
+Means:
+
+> Match the rows where column `B` in Table1 equals column `B` in Table2.
+
+---
+
+# 4. Real Database Example
+
+Our tables are:
+
+```text
+EMP
+DEPT
+```
+
+Both tables have:
+
+```text
+DEPT_ID
+```
+
+So `DEPT_ID` can be used to relate the two tables.
+
+For example:
+
+```text
+EMP.DEPT_ID = DEPT.DEPT_ID
+```
+
+---
+
+## 5. Important Example Using EMP and DEPT
+
+### Question
+
+**Display employee information together with department information by matching the department ID.**
+
+### Answer / Query
+
+```sql
+SELECT *
+FROM EMP
+INNER JOIN DEPT
+ON EMP.DEPT_ID = DEPT.DEPT_ID;
+```
+
+### What happens?
+
+Oracle checks:
+
+```text
+EMP.DEPT_ID
+     =
+DEPT.DEPT_ID
+```
+
+For every matching `DEPT_ID`, Oracle combines the corresponding rows.
+
+Only matching records appear in the result.
+
+---
+
+# 6. Why is `ON` important?
+
+The `ON` clause tells Oracle **which columns should be used to join the tables**.
+
+For example:
+
+```sql
+ON EMP.DEPT_ID = DEPT.DEPT_ID
+```
+
+means:
+
+```text
+EMP table
+DEPT_ID
+   ↓
+   =
+   ↑
+DEPT table
+DEPT_ID
+```
+
+Without knowing the relationship between the tables, Oracle does not know which rows should be matched for this Inner Join.
+
+---
+
+# 7. Table Alias
+
+When working with multiple tables, aliases make the query shorter and easier to understand.
+
+For example:
+
+```sql
+SELECT *
+FROM EMP e
+INNER JOIN DEPT d
+ON e.DEPT_ID = d.DEPT_ID;
+```
+
+Here:
+
+```text
+e → EMP
+d → DEPT
+```
+
+So:
+
+```sql
+e.DEPT_ID
+```
+
+means:
+
+```text
+EMP.DEPT_ID
+```
+
+and:
+
+```sql
+d.DEPT_ID
+```
+
+means:
+
+```text
+DEPT.DEPT_ID
+```
+
+The material also emphasizes using table aliases when the tables are related. 
+
+---
+
+# 8. What happens to non-matching records?
+
+Suppose:
+
+### EMP
+
+| EMP_ID | F_NAME | DEPT_ID |
+| -----: | ------ | ------: |
+|      1 | Akash  |      22 |
+|      2 | John   |      23 |
+|      3 | David  |      50 |
+
+### DEPT
+
+| DEPT_ID | DEPT_NAME   |
+| ------: | ----------- |
+|      22 | Development |
+|      23 | Testing     |
+|      24 | HR          |
+
+Now:
+
+```text
+22 → matches
+23 → matches
+50 → no match
+```
+
+With an Inner Join:
+
+```text
+22 → included
+23 → included
+50 → excluded
+```
+
+So:
+
+> **Inner Join does not preserve unmatched rows.**
+
+---
+
+# 9. Inner Join = Matching Records
+
+Remember this picture:
+
+```text
+       TABLE 1              TABLE 2
+          │                    │
+          │                    │
+          └────── MATCH ───────┘
+                    │
+                    ▼
+              RESULT
+           Only matching rows
+```
+
+This is the most important concept.
+
+---
+
+# 10. Inner Join vs Outer Join
+
+| Inner Join                                | Outer Join                                     |
+| ----------------------------------------- | ---------------------------------------------- |
+| Returns matching records                  | Can return non-matching records too            |
+| Unmatched rows are removed                | Unmatched rows can be retained                 |
+| Used when only related records are needed | Used when unmatched records are also important |
+
+---
+
+# 11. Interview Questions
+
+### Q1. What is an Inner Join?
+
+**Answer:**
+An Inner Join combines two or more tables using a common column and returns only the matching records.
+
+### Q2. What is another name for Inner Join?
+
+**Answer:**
+**Simple Join.**
+
+### Q3. Which clause normally specifies the joining condition in an Inner Join?
+
+**Answer:**
+The **`ON` clause**.
+
+### Q4. Does Inner Join return unmatched records?
+
+**Answer:**
+**No.** It returns only matching records.
+
+### Q5. Can Inner Join combine more than two tables?
+
+**Answer:**
+Yes. It can join two or more tables based on their related/common columns.
+
+---
+
+# 12. Easy Memory Trick
+
+```text
+INNER JOIN
+     ↓
+Look for MATCH
+     ↓
+Match found → Keep
+No match    → Remove
+```
+
+### One-line definition
+
+> **Inner Join = Join tables + compare related columns + return only matching rows.**

@@ -22,8 +22,6 @@
 
   <img src="https://img.shields.io/github/forks/shaikbasha-dev/Crystal-Clear-Oracle-SQL?style=flat-square" alt="GitHub Forks">
 
-  <img src="https://img.shields.io/github/license/shaikbasha-dev/Crystal-Clear-Oracle-SQL?style=flat-square" alt="License">
-
 </p>
 
 <p align="center">

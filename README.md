@@ -10,8 +10,6 @@
 
   <img src="https://img.shields.io/badge/Level-Beginner%20to%20Advanced-2E8B57?style=for-the-badge" alt="Beginner to Advanced">
 
-  <img src="https://img.shields.io/badge/Documentation-Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white" alt="Markdown">
-
 </p>
 
 <p align="center">
@@ -883,8 +881,6 @@ J_GRADE
   <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git">
 
   <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub">
-
-  <img src="https://img.shields.io/badge/Markdown-000000?style=flat-square&logo=markdown&logoColor=white" alt="Markdown">
 
 </p>
 
